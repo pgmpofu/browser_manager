@@ -1,28 +1,18 @@
+import os
 import webbrowser
-import sys
-import time
 
 
-def manage_browser():
-    print ('Opening favorite sites')
-
-    browser_list_file = 'websites.txt'
-    browser = 'chrome'
-
-    if len(sys.argv) >= 2:
-        browser_list_file = sys.argv[1].lower()
-    if len(sys.argv) >= 3:
-        browser_list_file = sys.argv[2].lower()
-
-    wbbrowser = webbrowser.get(browser)
-    with open(browser_list_file) as read_obj:
+def open_website():
+    if os.path.exists('websites.txt'):
         try:
-            for num, url in enumerate(read_obj):
-                wbbrowser.open_new_tab(url.strip())
-                time.sleep(1)
+            with open('websites.txt') as read_obj:
+                for num, url in enumerate(read_obj):
+                    webbrowser.open_new_tab(url.strip())
         except Exception as e:
-            print ('Error occurred ', e)
+            print ('An error occurred ', e)
+    else:
+        print ('File does not exist, please add and retry')
 
-    if __name__ == '__main__':
-        print ('Running main')
-        manage_browser()
+
+if __name__ == '__main__':
+    open_website()
