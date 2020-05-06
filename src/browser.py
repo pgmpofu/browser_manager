@@ -17,7 +17,7 @@ def open_website(file_to_open : str, error_msg: str):
         except IOError as e:
             print (error_msg, e)
     else:
-        raise IOError(error_msg)
+        raise Exception(error_msg)
 
 
 if __name__ == '__main__':
